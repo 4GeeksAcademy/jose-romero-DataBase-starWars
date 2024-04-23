@@ -17,7 +17,7 @@ class Users(Base):
     user_gender = Column(String(20))
     user_password = Column(String(20))
     user_fecha_suscripcion =Column (Date, nullable=False)
-    id_favorites =Column(Integer, ForeignKey('id_favorites'))
+    id_favorites =Column(Integer, ForeignKey('favorites.id_favorites'))
     
     
 
@@ -37,7 +37,7 @@ class Planets(Base):
     planets_name= Column(String(100))
     planets_terrain =Column(String(100))
     planets_description =Column(String(300))
-    id_favorites = Column(Integer, ForeignKey('id_favorites'))
+    id_favorites = Column(Integer, ForeignKey('favorites.id_favorites'))
     favorites = relationship(Favorites)
 
 
@@ -47,7 +47,7 @@ class Vehicles(Base):
     id_vehicles = Column(Integer, primary_key = True)
     vehicles_name= Column(String(100))
     vehicles_description =Column(String(300))
-    id_favorites = Column(Integer, ForeignKey('id_favorites'))
+    id_favorites = Column(Integer, ForeignKey('favorites.id_favorites'))
     favorites = relationship(Favorites)
 
 class Characters(Base):
@@ -57,26 +57,26 @@ class Characters(Base):
     characters_name= Column(String(100))
     characters_type= Column(String(50))
     characters_description =Column(String(300))
-    id_favorites = Column(Integer, ForeignKey('id_favorites'))
-    id_creatures = Column(Integer, ForeignKey('id_creatures'))
-    id_droids = Column(Integer, ForeignKey('id_droids'))
+    id_favorites = Column(Integer, ForeignKey('favorites.id_favorites'))
+    id_creatures = Column(Integer, ForeignKey('creatures.id_creatures'))
+    id_droids = Column(Integer, ForeignKey('droids.id_droids'))
     favorites = relationship(Favorites)
 
 class Creatures(Base):
-    __tablename__ = 'Creatures'
+    __tablename__ = 'creatures'
 
     id_creatures =(Column(Integer, primary_key =True))
     creatures_name =(Column(String(50)))
     creatures_description =Column(String(300))
-    id_characters = Column(Integer, ForeignKey('id_characters'))
+    d_characters = Column(Integer, ForeignKey('characters.id_characters'))
     Characters = relationship(Characters)
 
 class Droids(Base):
-    __tablename__ ='Droids'
+    __tablename__ ='droids'
     id_droids =(Column(Integer, primary_key =True))
     droids_name =(Column(String(50)))
     droids_description =Column(String(300))
-    id_characters = Column(Integer, ForeignKey('id_characters'))
+    id_characters = Column(Integer, ForeignKey('characters.id_characters'))
     Characters = relationship(Characters)
 
 
